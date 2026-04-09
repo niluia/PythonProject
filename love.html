@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>For You ❤️</title>
+<style>
+body {
+  font-family: Georgia;
+  text-align: center;
+  background: #f3a1bc;
+  margin: 0;
+  height: 100vh;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+/* Center content */
+.container {
+  z-index: 2;
+  position: relative;
+  max-width: 500px;
+}
+
+/* Bigger text */
+h2 {
+  font-size: 40px;
+}
+
+p {
+  font-size: 22px;
+}
+
+button {
+  padding: 12px 25px;
+  margin: 10px;
+  font-size: 18px;
+  border: none;
+  border-radius: 20px;
+  background-color: white;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+button:hover {
+  background-color: #ffe4ec;
+}
+
+.hidden { display: none; }
+
+/* 💖 Hearts */
+.heart {
+  position: absolute;
+  color: #ff4d6d;
+  font-size: 20px;
+  animation: floatUp 8s linear infinite;
+  opacity: 0.6;
+  pointer-events: none;
+  z-index: 1
+}
+
+@keyframes floatUp {
+  0% {
+    transform: translateY(100vh) scale(1);
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.7;
+  }
+  100% {
+    transform: translateY(-10vh) scale(1.5);
+    opacity: 0;
+  }
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<div id="start">
+  <h2>Hey Murik 🐈</h2>
+  <p>I have a small quiz for you</p>
+  <button onclick="next(1)">Start</button>
+  <br>
+  <img src="cat.jpg" alt="start pic"
+       style="width:90%; max-width:500px; margin-top:20px; border-radius:15px;">
+</div>
+
+<div id="q1" class="hidden">
+  <p>How long have we been together?</p>
+
+  <button onclick="q1wrong()">1 year</button>
+  <button onclick="q1correct()">1.5 years</button>
+  <button onclick="q1sweet()">Forever</button>
+
+  <p id="q1msg"></p>
+  <br>
+  <img src="dog.jpg" alt="start pic"
+       style="width:90%; max-width:500px; margin-top:20px; border-radius:15px;">
+</div>
+
+<div id="q2" class="hidden">
+  <p>How many days is that?</p>
+
+  <button onclick="q2wrong()">500</button>
+  <button onclick="q2correct()">515</button>
+  <button onclick="q2future()">855</button>
+
+  <p id="q2msg"></p>
+    <br>
+  <img src="bee.jpg" alt="start pic"
+       style="width:90%; max-width:500px; margin-top:20px; border-radius:15px;">
+</div>
+
+<div id="q3" class="hidden">
+  <p>How many minutes?</p>
+
+  <button onclick="q3almost()">788,920</button>
+  <button onclick="q3second()">798,920</button>
+  <button onclick="q3correct()">788,923</button>
+
+  <p id="q3msg"></p>
+    <img src="rat.jpg" alt="start pic"
+       style="width:90%; max-width:500px; margin-top:20px; border-radius:15px;">
+</div>
+
+<div id="final" class="hidden">
+  <p>
+  Every minute is a minute I spent thinking about you <br><br>
+
+  That is the time I had a reason to smile,<br>
+  to feel love, care and butterflies <br><br>
+
+  Thank you for being with me,<br>
+  listening to my complaints,<br>
+  my crazy stories <br>
+  and always supporting me.<br><br>
+
+  We are together half of 3 years hahaha <br><br>
+
+  I love you <br>
+  Happy anniversary!
+  </p>
+  <img src="mice.jpg" alt="start pic"
+       style="width:90%; max-width:300px; margin-top:20px; border-radius:15px;">
+
+</div>
+
+<script>
+function next(n) {
+  document.querySelectorAll("#start, #q1, #q2, #q3, #final")
+    .forEach(d => d.classList.add("hidden"));
+
+  document.getElementById("q" + n).classList.remove("hidden");
+}
+
+function showFinal() {
+  document.querySelectorAll("#start, #q1, #q2, #q3, #final")
+    .forEach(d => d.classList.add("hidden"));
+
+  document.getElementById("final").classList.remove("hidden");
+}
+
+// Q1
+function q1wrong() {
+  document.getElementById("q1msg").innerHTML = "I think you can stop here quiz";
+}
+function q1correct() {
+  document.getElementById("q1msg").innerHTML = "Correct! I can not believe it is already so much ";
+  setTimeout(() => next(2), 1200);
+}
+function q1sweet() {
+  document.getElementById("q1msg").innerHTML = "Well done, I wish we will be forever";
+  setTimeout(() => next(2), 1200);
+}
+
+// Q2
+function q2wrong() {
+  document.getElementById("q2msg").innerHTML = "I believe you can count better ";
+}
+function q2correct() {
+  document.getElementById("q2msg").innerHTML = "Bingo!";
+  setTimeout(() => next(3), 1200);
+}
+function q2future() {
+  document.getElementById("q2msg").innerHTML = "Noo, that is the future, we are not there yet";
+}
+
+// Q3
+function q3almost() {
+  document.getElementById("q3msg").innerHTML = "Hmmm almost, be more precise";
+}
+function q3second() {
+  document.getElementById("q3msg").innerHTML = "Second chance";
+}
+function q3correct() {
+  document.getElementById("q3msg").innerHTML = "Yaaay well done";
+  setTimeout(() => showFinal(), 1200);
+}
+</script>
+<script>
+// existing script stays above this
+
+// create hearts
+function createHeart() {
+  const heart = document.createElement("div");
+  heart.classList.add("heart");
+  heart.innerHTML = "💖";
+
+  heart.style.left = Math.random() * 100 + "vw";
+  heart.style.fontSize = (15 + Math.random() * 25) + "px";
+
+  document.body.appendChild(heart);
+
+  setTimeout(() => {
+    heart.remove();
+  }, 6000);
+}
+
+// generate hearts continuously
+setInterval(createHeart, 400);
+</script>
+</div>
+</body>
+</html>
